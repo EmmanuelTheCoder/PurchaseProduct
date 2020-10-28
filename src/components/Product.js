@@ -67,11 +67,28 @@ const ProductWrapper = styled.div`
     .img-container:hover .card-img-top{
         transform: scale(1.2);
     }
+    .cart-btn{
+        padding: 0.2rem 0.4rem;
+        background: var(--lightBlue);
+        border: none;
+        color: var(--mainWhite);
+        font-size: 1.4rem;
+        border-radius: 0.5rem 0 0 0;
+        transition: all 5s linear;
+    }
+    .img-container:hover .cart-btn{
+        right: .5rem;
+        
+    }
+    .cart-btn:hover{
+        color: var(--mainBlue);
+        cursor: pointer;
+    }
 `
 const CartButton = styled.button`
     position: absolute;
     bottom: .6rem;
-    right: .5rem;
+    right: .3rem;
 
 
 `
