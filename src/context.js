@@ -7,7 +7,8 @@ const ProductContext = React.createContext();
 function ProductProvider({children}) {
     const [getProduct, setGetProduct] = useState({
         products: [],
-        detailProduct: detailProduct
+        detailProduct: detailProduct,
+        cart: []
     });
     
     useEffect(()=>{
@@ -37,11 +38,27 @@ const getItem = (id) =>{
     const product = getProduct.products.find(item=> item.id === id);
     return product;
 }
-const handleDetail = () =>{
-    console.log("hello from detail")
+const handleDetail = (id) =>{
+    const product = getItem(id);
+    setGetProduct(()=>{
+        return {...getProduct, detailProduct: product}
+    });
 }
 const addToCart = (id) =>{
-    console.log(`add to cart id is ${id}` )
+    let tempProducts = [...getProduct.products];
+    const index = tempProducts.indexOf(getItem(id));
+    const product = tempProducts[index];
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    
+    setGetProduct(()=>{
+        return {...getProduct, product: tempProducts, cart:[...getProduct.cart, product]};
+
+    },()=>{
+        console.log(getProduct)
+    });
 }
 // const tester = () =>{
 //     console.log("state product" + getProduct.products[0].inCart);
