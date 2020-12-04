@@ -8,12 +8,14 @@ function ProductProvider({children}) {
     const [getProduct, setGetProduct] = useState({
         products: [],
         detailProduct: detailProduct,
-        cart: []
+        cart: [],
+        modalOpen: true,
+        modalProduct: detailProduct,
     });
     
     useEffect(()=>{
         setProducts();
-    },[])
+    },[]);
     
 const setProducts = () =>{
     let tempProducts = [];
@@ -56,9 +58,21 @@ const addToCart = (id) =>{
     setGetProduct(()=>{
         return {...getProduct, product: tempProducts, cart:[...getProduct.cart, product]};
 
-    },()=>{
+    },
+    ()=>{
         console.log(getProduct)
     });
+}
+const openModal = id =>{
+    const product = getItem(id);
+    setGetProduct(()=>{
+        return {...getProduct, modalProduct: product, modalOpen: true}
+    })
+}
+const closeModal = id =>{
+    setGetProduct(()=>{
+        return {...getProduct, modalOpen: false}
+    })
 }
 // const tester = () =>{
 //     console.log("state product" + getProduct.products[0].inCart);
@@ -80,7 +94,10 @@ const addToCart = (id) =>{
             
             ...getProduct, 
             handleDetail: handleDetail,
-            addToCart: addToCart
+            addToCart: addToCart,
+            openModal: openModal,
+            closeModal: closeModal
+            
             
         }}>
             {/* <button onClick={tester}>test me</button> */}
