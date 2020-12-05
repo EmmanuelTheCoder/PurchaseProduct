@@ -9,7 +9,7 @@ function ProductProvider({children}) {
         products: [],
         detailProduct: detailProduct,
         cart: [],
-        modalOpen: true,
+        modalOpen: false,
         modalProduct: detailProduct,
     });
     
@@ -69,7 +69,7 @@ const openModal = id =>{
         return {...getProduct, modalProduct: product, modalOpen: true}
     })
 }
-const closeModal = id =>{
+const closeModal = () =>{
     setGetProduct(()=>{
         return {...getProduct, modalOpen: false}
     })
