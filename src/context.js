@@ -11,6 +11,9 @@ function ProductProvider({children}) {
         cart: [],
         modalOpen: false,
         modalProduct: detailProduct,
+        cartSubtotal: 0,
+        cartTax: 0,
+        cartTotal: 0 
     });
     
     useEffect(()=>{
@@ -19,18 +22,13 @@ function ProductProvider({children}) {
     
 const setProducts = () =>{
     let tempProducts = [];
-    //console.log("temp product 0", tempProducts)
+
     storeProducts.forEach(item=>{
-        //console.log("temp product 0.1", tempProducts)
-        //console.log({...item})
+        
         const singleItem = {...item};
         tempProducts = [...tempProducts, singleItem];
 
-        //console.log("temp product", tempProducts)
-        //tempProducts = [...tempProducts, {...item}]
-        //console.log("temp product 2", tempProducts)
         
-
     });
     setGetProduct(()=>{
         return {...getProduct, products: tempProducts}
@@ -49,30 +47,47 @@ const handleDetail = (id) =>{
 const addToCart = (id) =>{
     let tempProducts = [...getProduct.products];
     const index = tempProducts.indexOf(getItem(id));
-    const product = tempProducts[index];
+    let product = tempProducts[index];
     product.inCart = true;
     product.count = 1;
     const price = product.price;
     product.total = price;
     
     setGetProduct(()=>{
-        return {...getProduct, product: tempProducts, cart:[...getProduct.cart, product]};
+        return {...getProduct, products: tempProducts, cart:[...getProduct.cart, product]};
 
-    },
-    ()=>{
-        console.log(getProduct)
     });
 }
 const openModal = id =>{
     const product = getItem(id);
+
+    let tempProducts = [...getProduct.products];
+    const index = tempProducts.indexOf(getItem(id));
+    let cartProduct = tempProducts[index];
+    cartProduct.inCart = true;
+    cartProduct.count = 1;
+    const price = cartProduct.price;
+    cartProduct.total = price;
     setGetProduct(()=>{
-        return {...getProduct, modalProduct: product, modalOpen: true}
+        return {...getProduct, modalProduct: product, modalOpen: true, products: tempProducts, cart:[...getProduct.cart, cartProduct]}
     })
 }
 const closeModal = () =>{
     setGetProduct(()=>{
         return {...getProduct, modalOpen: false}
     })
+}
+const increment = (id) =>{
+    console.log("increment method")
+}
+const decrement = (id) =>{
+    console.log("decrement method")
+}
+const removeItem = () =>{
+    console.log("item removed");
+}
+const clearCart = () =>{
+    console.log("cart cleared.")
 }
 // const tester = () =>{
 //     console.log("state product" + getProduct.products[0].inCart);
@@ -96,7 +111,11 @@ const closeModal = () =>{
             handleDetail: handleDetail,
             addToCart: addToCart,
             openModal: openModal,
-            closeModal: closeModal
+            closeModal: closeModal,
+            increment: increment,
+            decrement: decrement,
+            removeItem: removeItem,
+            clearCart: clearCart
             
             
         }}>

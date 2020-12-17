@@ -11,7 +11,7 @@ export default function Modal(props) {
     return (
        <ProductConsumer>
            {value =>{
-               const {modalOpen, closeModal} = value;
+               const { closeModal, modalOpen} = value;
                const {img, title, price} = value.modalProduct
                
                if(!modalOpen){
@@ -23,7 +23,7 @@ export default function Modal(props) {
                                 <div className="row">
                                     <div className="col-9 mx-auto col-md-6 col-lg-4 text-center text-capitalize" id="modal">
                                         <h5>item added to the cart</h5>
-                                        <img src={img} alt="img-fluid" alt={title}/>
+                                        <img src={img} className="img-fluid"/>
                                         <h5>{title}</h5>
                                         <h5 className="text-muted">
                                             price: ${price}
@@ -32,12 +32,12 @@ export default function Modal(props) {
                                             <ButtonContainer onClick={()=>closeModal()}>
                                                 store
                                             </ButtonContainer>
+                                        </Link>
                                             <Link to="/cart">
                                                 <ButtonContainer onClick={()=>closeModal()} cart>
                                                     go to cart
                                                 </ButtonContainer>
                                             </Link>
-                                        </Link>
                                     </div>
                                 </div>
                             </div>

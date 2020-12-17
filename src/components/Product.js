@@ -4,22 +4,33 @@ import {Link} from 'react-router-dom';
 import {ProductConsumer} from '../context';
 import PropTypes from 'prop-types'
 
-function Product(props) {
+
+function Product({product}) {
     
-    const {id, title, img, price, inCart} = props.product;
+    const {id, title, img, price, inCart} = product;
     return (
        <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
            <div className="card">
                <ProductConsumer>
-                   {value =>(
+                   {value =>{
+                        const changeover = () =>{
+                            value.addToCart(id);
+                            value.openModal(id);
+                        }
+                    return(
+                        //fix the onclick event here
+                        <div>
 
+                        
                     <div className="img-container p-5" onClick={()=> value.handleDetail(id)}>
                         <Link to="/details">
                             <img src={img} alt="product" className="card-img-top"/>
                         </Link>
+                    </div>
                         <CartButton className="cart-btn" 
                             disabled={inCart ? true : false}
                             onClick={()=>{
+                                
                                 value.addToCart(id);
                                 value.openModal(id);
                             }}
@@ -28,7 +39,8 @@ function Product(props) {
                             >In cart</p>) : (<i className="fas fa-cart-plus" />)}
                         </CartButton>
                     </div>
-                   )}
+                    );
+                    }}
 
 
                  </ProductConsumer>
@@ -108,7 +120,7 @@ const ProductWrapper = styled.div`
 `
 const CartButton = styled.button`
     position: absolute;
-    bottom: .6rem;
+    bottom: 3.6rem;
     right: .3rem;
 
 
