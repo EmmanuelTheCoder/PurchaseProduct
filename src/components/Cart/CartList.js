@@ -5,7 +5,7 @@ import CartItems from './CartItems';
 export default function Cartlist({value}) {
     
     const {cart} = value;
-    console.log(value, cart);
+    console.log("carty cart cart", cart);
 
     return (
       <div className="container-fluid">

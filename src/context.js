@@ -28,8 +28,10 @@ const setProducts = () =>{
         const singleItem = {...item};
         tempProducts = [...tempProducts, singleItem];
 
+        console.log("single items", singleItem)
         
     });
+    
     setGetProduct(()=>{
         return {...getProduct, products: tempProducts}
     });
@@ -57,8 +59,9 @@ const addToCart = (id) =>{
         return {...getProduct, products: tempProducts, cart:[...getProduct.cart, product]};
 
     });
+    //console.log("checking cart product", getProduct.cart)
 }
-const openModal = id =>{
+const openModal = (id) =>{
     const product = getItem(id);
 
     let tempProducts = [...getProduct.products];

@@ -13,10 +13,7 @@ function Product({product}) {
            <div className="card">
                <ProductConsumer>
                    {value =>{
-                        const changeover = () =>{
-                            value.addToCart(id);
-                            value.openModal(id);
-                        }
+                        
                     return(
                         //fix the onclick event here
                         <div>
@@ -33,6 +30,7 @@ function Product({product}) {
                                 
                                 value.addToCart(id);
                                 value.openModal(id);
+                                console.log("values from cart", value.cart)
                             }}
                             >
                             {inCart ? (<p className="text-capitalize mb-0" disabled
