@@ -13,7 +13,7 @@ function Details() {
                 
                 return(
                     <div className="container py-5">
-                        {/* title */}
+                        {/* here is the title */}
                         
                         <div className="row">
                             <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
